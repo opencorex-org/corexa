@@ -17,6 +17,8 @@
     "changeset": "changeset",
     "desktop:dev": "pnpm --filter @corexa/desktop dev",
     "cli:dev": "pnpm --filter @corexa/cli dev",
+    "docs:dev": "pnpm --filter @corexa/docs-site dev",
+    "docs:build": "pnpm --filter @corexa/docs-site build",
     "runtime:dev": "go -C runtime/daemon run ./cmd/corexad",
     "runtime:test": "go -C runtime/daemon test ./...",
     "native:test": "cargo test --manifest-path native/tree-sitter-indexer/Cargo.toml"

@@ -2,6 +2,16 @@
 
 This is the primary documentation hub for Corexa.
 
+## Docs Site
+
+Corexa now includes a React-based GitHub Pages website in [docs/site](site/README.md).
+
+Use it locally with:
+
+```bash
+pnpm docs:dev
+```
+
 ## Documentation Map
 
 ### Architecture
@@ -24,6 +34,7 @@ This is the primary documentation hub for Corexa.
 
 - [Development Index](development/README.md)
 - [Local Development](development/local-development.md)
+- [Docs Site Guide](site/README.md)
 - [Testing and Release](development/testing-and-release.md)
 
 ## Audience Guide

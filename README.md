@@ -59,6 +59,7 @@ scripts/        Bootstrap, dev, and utility scripts
 ### Start Here
 
 - [Documentation Hub](docs/README.md)
+- [Docs Site Source](docs/site/README.md)
 - [Architecture Overview](docs/architecture/corexa-platform-architecture.md)
 - [Monorepo Structure](docs/architecture/monorepo-structure.md)
 - [Project Goals](docs/project/goals.md)
@@ -93,6 +94,12 @@ pnpm install
 
 ```bash
 pnpm dev
+```
+
+Start the GitHub Pages documentation site locally:
+
+```bash
+pnpm docs:dev
 ```
 
 Start the local runtime separately when wiring the desktop app to the Go daemon:
@@ -159,6 +166,7 @@ Corexa is being structured as a serious long-term open source project:
 - Rust acceleration for performance-sensitive modules
 - Biome for formatting and linting
 - GitHub Actions for CI, release, and repository health
+- GitHub Pages powered by the React site in `docs/site`
 
 ## License
 
