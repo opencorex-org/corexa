@@ -1,3 +1,4 @@
+import { spawnSync } from "node:child_process";
 import { existsSync, readFileSync } from "node:fs";
 import { createRequire } from "node:module";
 import path from "node:path";
@@ -19,6 +20,76 @@ function fail(message) {
   process.exit(1);
 }
 
+function inspectElectronRuntime(electronPackageDir) {
+  const pathFile = path.join(electronPackageDir, "path.txt");
+
+  if (!existsSync(pathFile)) {
+    return {
+      message:
+        "Electron package metadata exists, but the downloaded binary marker file path.txt is missing.",
+      ok: false,
+    };
+  }
+
+  const executableRelativePath = readFileSync(pathFile, "utf8").trim();
+
+  if (!executableRelativePath) {
+    return {
+      message: "Electron path.txt is empty, so the runtime executable cannot be located.",
+      ok: false,
+    };
+  }
+
+  const executablePath = path.join(electronPackageDir, "dist", executableRelativePath);
+
+  if (!existsSync(executablePath)) {
+    return {
+      message: `Electron expected a runtime executable at ${executablePath}, but it was not found.`,
+      ok: false,
+    };
+  }
+
+  return { ok: true };
+}
+
+function attemptRepair(electronPackageDir, reason) {
+  const installScript = path.join(electronPackageDir, "install.js");
+
+  if (!existsSync(installScript)) {
+    return {
+      message: `Automatic repair could not start because ${installScript} does not exist.`,
+      ok: false,
+    };
+  }
+
+  console.warn("");
+  console.warn("[Corexa desktop] Electron runtime is incomplete.");
+  console.warn(`[Corexa desktop] ${reason}`);
+  console.warn("[Corexa desktop] Attempting an automatic Electron repair...");
+  console.warn("");
+
+  const result = spawnSync(process.execPath, [installScript], {
+    cwd: electronPackageDir,
+    stdio: "inherit",
+  });
+
+  if (result.error) {
+    return {
+      message: `Automatic Electron repair failed to start: ${result.error.message}`,
+      ok: false,
+    };
+  }
+
+  if (result.status !== 0) {
+    return {
+      message: `Automatic Electron repair exited with status ${result.status ?? "unknown"}.`,
+      ok: false,
+    };
+  }
+
+  return { ok: true };
+}
+
 let electronPackageDir;
 
 try {
@@ -27,22 +98,18 @@ try {
   fail("The electron package could not be resolved from apps/desktop/node_modules.");
 }
 
-const pathFile = path.join(electronPackageDir, "path.txt");
+let runtimeState = inspectElectronRuntime(electronPackageDir);
 
-if (!existsSync(pathFile)) {
-  fail(
-    "Electron package metadata exists, but the downloaded binary marker file path.txt is missing.",
-  );
-}
+if (!runtimeState.ok) {
+  const repairResult = attemptRepair(electronPackageDir, runtimeState.message);
 
-const executableRelativePath = readFileSync(pathFile, "utf8").trim();
+  if (!repairResult.ok) {
+    fail(repairResult.message);
+  }
 
-if (!executableRelativePath) {
-  fail("Electron path.txt is empty, so the runtime executable cannot be located.");
-}
+  runtimeState = inspectElectronRuntime(electronPackageDir);
 
-const executablePath = path.join(electronPackageDir, "dist", executableRelativePath);
-
-if (!existsSync(executablePath)) {
-  fail(`Electron expected a runtime executable at ${executablePath}, but it was not found.`);
+  if (!runtimeState.ok) {
+    fail(`Automatic repair completed, but Electron is still incomplete. ${runtimeState.message}`);
+  }
 }
