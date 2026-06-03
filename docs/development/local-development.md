@@ -34,7 +34,7 @@ cargo test --manifest-path native/tree-sitter-indexer/Cargo.toml
 
 ## Desktop Troubleshooting
 
-If Electron is installed but the binary payload is missing:
+If Electron is installed but the binary payload is missing, the desktop preflight now attempts an automatic repair before it exits. If you still need to repair it manually:
 
 ```bash
 pnpm --filter @corexa/desktop run repair:electron
