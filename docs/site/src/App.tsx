@@ -1,9 +1,9 @@
-import { useState } from "react";
 import { Header } from "@docs/components/Header.js";
 import { MilestoneRail } from "@docs/components/MilestoneRail.js";
 import { ResourceCard } from "@docs/components/ResourceCard.js";
 import { SectionHeading } from "@docs/components/SectionHeading.js";
 import { buildSiteContent } from "@docs/content.js";
+import { useState } from "react";
 
 const DEFAULT_REPO_URL = "https://github.com/opencorex-org/corexa";
 
@@ -39,7 +39,12 @@ export function App() {
                 <a className="button button--primary" href="#docs-map">
                   Explore the docs map
                 </a>
-                <a className="button button--secondary" href={repoUrl} rel="noreferrer" target="_blank">
+                <a
+                  className="button button--secondary"
+                  href={repoUrl}
+                  rel="noreferrer"
+                  target="_blank"
+                >
                   Open the repository
                 </a>
               </div>

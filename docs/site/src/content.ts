@@ -155,7 +155,11 @@ export function buildSiteContent(repoUrl: string): SiteContent {
       { id: "metric-runtime", label: "Primary runtime", value: "Go daemon + local providers" },
       { id: "metric-desktop", label: "Core surfaces", value: "Desktop, CLI, SDK, plugins" },
       { id: "metric-stack", label: "Workspace stack", value: "pnpm + Turbo + React + Rust" },
-      { id: "metric-ops", label: "Open source posture", value: "Docs, issues, CI, Pages, Dependabot" },
+      {
+        id: "metric-ops",
+        label: "Open source posture",
+        value: "Docs, issues, CI, Pages, Dependabot",
+      },
     ],
     milestones: [
       {
