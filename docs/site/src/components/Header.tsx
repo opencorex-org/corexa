@@ -1,4 +1,5 @@
 import type { NavItem } from "@docs/content.js";
+import { Code2 } from "lucide-react";
 
 type HeaderProps = {
   isMenuOpen: boolean;
@@ -37,6 +38,7 @@ export function Header({ isMenuOpen, navItems, onToggleMenu, repoUrl }: HeaderPr
             </a>
           ))}
           <a className="site-nav__cta" href={repoUrl} rel="noreferrer" target="_blank">
+            <Code2 />
             GitHub
           </a>
         </nav>
