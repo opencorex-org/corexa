@@ -20,21 +20,21 @@
     "@corexa/runtime-client": "workspace:*",
     "@corexa/shared": "workspace:*",
     "@corexa/ui": "workspace:*",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7",
     "xterm": "^5.3.0"
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.1.8",
     "@types/node": "^22.10.1",
-    "@types/react": "^18.3.12",
-    "@types/react-dom": "^18.3.1",
-    "@vitejs/plugin-react": "^4.3.3",
-    "@biomejs/biome": "^1.9.4",
-    "electron": "^33.2.1",
-    "electron-vite": "^2.3.0",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.3",
+    "@biomejs/biome": "^2.5.2",
+    "electron": "^43.0.0",
+    "electron-vite": "^5.0.0",
     "tailwindcss": "^4.0.0",
-    "typescript": "^5.6.3",
-    "vite": "^5.4.11"
+    "typescript": "^6.0.3",
+    "vite": "^8.1.3"
   }
 }
