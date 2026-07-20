@@ -18,11 +18,11 @@
     "@corexa/shared": "workspace:*",
     "@corexa/workspace-core": "workspace:*",
     "chalk": "^5.4.1",
-    "commander": "^12.1.0"
+    "commander": "^15.0.0"
   },
   "devDependencies": {
     "@types/node": "^22.10.1",
     "tsx": "^4.19.2",
-    "typescript": "^5.6.3"
+    "typescript": "^7.0.2"
   }
 }
